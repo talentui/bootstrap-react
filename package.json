@@ -1,5 +1,5 @@
 {
-  "name": "@beisen/talent-ui-redux",
+  "name": "@beisen/talent-ui-store",
   "version": "1.0.0",
   "main": "lib/configureStore.js",
   "license": "MIT",
