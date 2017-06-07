@@ -6,6 +6,10 @@
   "scripts": {
     "build": "rm -rf lib && babel src -d lib"
   },
+  "author": {
+    "name": "liguoming",
+    "email": "liguoming@beisen.com"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.5.1",
