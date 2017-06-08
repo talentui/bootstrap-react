@@ -1,10 +1,11 @@
 {
-  "name": "@beisen/talent-ui-store",
+  "name": "@beisen/talent-ui-bootstrap",
   "version": "1.0.0",
-  "main": "lib/configureStore.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf lib && babel src -d lib"
+    "build": "rm -rf lib && babel src -d lib",
+    "prepublish": "yarn run build"
   },
   "author": {
     "name": "liguoming",
