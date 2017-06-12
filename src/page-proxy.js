@@ -37,8 +37,8 @@ class PageProxy extends Component {
     }
 
     loadAsyncPages(path){
-        let {loader} = this.props;
-        loader(path).then((Component) => {
+        let loader =  import(/* webpackMode: "lazy", webpackChunkName: "[request]" */ `containers/${path}/index`);
+        loader.then((Component) => {
             this.setState({
                 [path]: Component['default'],
                 [currentPage]: path

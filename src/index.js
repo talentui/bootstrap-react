@@ -3,16 +3,23 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import TalentUIBootstrap from "./root-class";
 import configureStore from "./configure-store";
+import reducer from "reducers";
 
-export const kickoff = options => {
-    let { reducer, loader, reduxMiddleware = [], initialState } = options;
-    let store = configureStore(reducer, initialState, reduxMiddleware);
-    return app => {
-        render(
-            <Provider store={store}>
-                <TalentUIBootstrap app={app} loader={loader} />
-            </Provider>,
-            document.getElementById("bsMain")
-        );
-    };
+let store = configureStore(reducer);
+
+const r = () => {
+    render(
+        <Provider store={store}>
+            <TalentUIBootstrap  />
+        </Provider>,
+        document.getElementById("bsMain")
+    );
 };
+
+r();
+
+if(module.hot){
+    module.hot.accept('./root-class', ()=>{
+        r();
+    })
+}
