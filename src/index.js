@@ -7,12 +7,11 @@ import { Provider } from "react-redux";
 //import from local file
 import PageProxy from "./page-proxy";
 import configureStore from "./configure-store";
-import composeReducer from "./compose-reducer";
 
 // import from project
 import reducer from "reducers";
 
-let store = configureStore(composeReducer(reducer));
+let store = configureStore(reducer);
 
 const kickoff = () => {
     render(
