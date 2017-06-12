@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import App from "entry";
 
 const currentPage = "$$currentPage";
 
@@ -30,20 +31,22 @@ class PageProxy extends Component {
         let { state } = this;
         let path = this.getPagePath();
         let PageComponent = state[path];
-        if (PageComponent) {
-            return <PageComponent {...this.props} />;
-        }
-        return null;
+        return (
+            <App {...this.props}>
+                {PageComponent ? <PageComponent {...this.props} /> : null}
+            </App>
+        );
     }
 
-    loadAsyncPages(path){
-        let loader =  import(/* webpackMode: "lazy", webpackChunkName: "[request]" */ `containers/${path}/index`);
-        loader.then((Component) => {
+    loadAsyncPages(path) {
+        import(
+            /* webpackMode: "lazy", webpackChunkName: "[request]" */ `containers/${path}/index`
+        ).then(Component => {
             this.setState({
-                [path]: Component['default'],
+                [path]: Component["default"],
                 [currentPage]: path
-            })
-        })
+            });
+        });
     }
 }
 
