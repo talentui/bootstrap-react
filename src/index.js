@@ -3,6 +3,7 @@ import React from "react";
 import { render } from "react-dom";
 import { HashRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+import composeReducer from "./compose-reducers";
 
 //import from local file
 import PageProxy from "./page-proxy";
@@ -13,7 +14,7 @@ import reducer from "reducers";
 
 let store = configureStore(reducer);
 
-const kickoff = () => {
+const bootstrap = () => {
     render(
         <Provider store={store}>
             <Router>
@@ -24,11 +25,11 @@ const kickoff = () => {
     );
 };
 
-kickoff();
+bootstrap();
 
 if (module.hot) {
     module.hot.accept("./page-proxy", () => {
-        kickoff();
+        bootstrap();
     });
 
     module.hot.accept("reducers", () => {
