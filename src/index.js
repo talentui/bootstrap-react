@@ -1,35 +1,39 @@
-//import from node_modules
 import React from "react";
 import { render } from "react-dom";
 import { HashRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import composeReducer from "./compose-reducers";
+import config from 'app-config';
 
 //import from local file
 import PageProxy from "./page-proxy";
 import configureStore from "./configure-store";
 
-// import from project
 import reducer from "reducers";
 
 let store = configureStore(reducer);
+let mountTarget = config.el || 'bsMain';
 
-const bootstrap = () => {
+if(typeof(mountTarget) === 'string'){
+    mountTarget = document.getElementById(mountTarget);
+}
+
+const bootstrap = node => {
     render(
         <Provider store={store}>
             <Router>
-                <Route path="*" render={props => <PageProxy {...props} />} />
+                <Route path="*" component={PageProxy} />
             </Router>
         </Provider>,
-        document.getElementById("bsMain")
+        node
     );
 };
 
-bootstrap();
+bootstrap(mountTarget);
 
 if (module.hot) {
     module.hot.accept("./page-proxy", () => {
-        bootstrap();
+        bootstrap(mountTarget);
     });
 
     module.hot.accept("reducers", () => {
