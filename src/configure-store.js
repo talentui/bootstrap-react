@@ -3,7 +3,7 @@ import appConfig from "app-config";
 const emptyArray = [];
 import composeReducer from "./compose-reducers";
 
-const getMiddlewareConfig = config => {
+const getMiddlewareConfig = (config = {}) => {
     let middlewares = [],
         callback,
         initialState;
