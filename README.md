@@ -16,35 +16,65 @@
                 --> footer.js
             -- reducers
                 //建议和你的页面结构对应
+            -- app-config.js
 
  ```
 
 ```js
     //你在entry.js中
-    import {kickoff} from "@beisen/talent-ui-bootstrap";
-    import reducers from "reducers";
-    import App from 'components/common/app';
+    import React, { Component } from "react";
+    import Header from "components/common/header";
+    import Footer from "components/common/footer";
+    import Sidebar from "components/common/sidebar";
+    import mainStyle from './styles.scss';
 
-    // 使用pageLoader来实现代码拆分和异步加载
-    const pageLoader = (path) => import(/* webpackMode: "lazy", webpackChunkName: "[request]" */ `containers/${path}/index`);
-
-    //启动应用的代理，并且使用这个来实现组件的热更新
-    const kickoffDelegation = kickoff({
-        reducer: reducers, //required
-        loader: pageLoader //required
-        // ,reduxMiddleware: [] //optional
-        // ,initialState: {} //optional
-    });
-
-    //现在启动我们的程序吧
-    kickoffDelegation(App);
-
-    //启动热更新
-    if(module.hot){
-        module.hot.accept('components/common/app', () => {
-            kickoffDelegation(App)
-        });
+    /**
+    * 必需！！
+    * 应用组件
+    * 如果项目中使用了页面对代码进行拆分，需要把页面的代码通过this.props.children来访问页面组件
+    * 在talent-ui-2.0中如果使用了talent-ui-bootstrap作为项目的entry, 只需要export组件就可以了
+    */
+    export default class App extends Component {
+        render() {
+            return (
+                <div>
+                    <Header />
+                    <div className="content-wrapper">
+                        {this.props.children}
+                    </div>
+                    <Footer />
+                </div>
+            );
+        }
     }
+
+    ....
+
+    // app-config.js 这个是必须要存在的文件， 基本上是用来配置单向数据流的，当然如果需要其他的扩展点，也会通过这个文件来实现，比如el
+    import reduxThunk from "redux-thunk";
+    import logger from "redux-logger";
+
+    //应用配置文件，这个文件是必须存在的，但是配置可以为空，可以对项目运行时进行一些配置，比如，配置应用的初始state, redux中间件
+    /**
+    * 导出对象 应用配置，作为业务的扩展点
+    *  @middlewares：包含middlewares，
+    *  @afterCreateStore：创建完成store之后的回调，比如使用Redux-saga就需要在创建完store之后运行Saga
+    *  @initialState: 应用程序的初始状态，一般没什么用，万一有用呢。
+    *  @el: 如果是字符串，就是指定dom的ID, 也可以传dom对象, 默认是bsMain
+    *  @...：   如果有什么需求可以提给liguoming@beisen.com，
+    */
+    const config = {
+        middlewares: [reduxThunk],
+        afterCreateStore: function(store) {},
+        initialState: {},
+        el: 'bsMain'
+    };
+    export default config;
+
 ```
+
+
+
+
 
 ### 你不需要对路由，redux相关的东西做什么配置，就可以启动程序啦，当然，你还需要[talent-ui-webpackConfig](http://gitlab.beisencorp.com/ux-cnpm/talent-ui-webpack-config) 来帮你生成webpack配置来应用本地的开发环境。
