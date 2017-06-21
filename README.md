@@ -97,4 +97,4 @@
 
 > 使用**page-view.js**来表示目录下的页面组件。
 
-> **支持子路由和代码拆分**, 我们可以使用#/home/user这样的路由来访问pages/home/user/page-view.js所代表的页面。每一个页面都是一个code splitting的点，都会被打包成一个单独的chunk。你可以查看我们的[示例项目]()
+> **支持子路由和代码拆分**, 我们可以使用#/home/user这样的路由来访问pages/home/user/page-view.js所代表的页面。每一个页面都是一个code splitting的点，都会被打包成一个单独的chunk。你可以查看我们的[示例项目](http://gitlab.beisencorp.com/starter-templates/talent-ui-2.0-starter)
