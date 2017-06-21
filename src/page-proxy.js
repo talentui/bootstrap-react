@@ -10,8 +10,8 @@ class PageProxy extends Component {
     }
 
     getPagePath(props) {
-        let { location: { pathname } } = props || this.props;
-        let path = pathname.split("/")[1] || "home";
+        let { match: { url } } = props || this.props;
+        let path = url.substr(1) || "home";
         return path;
     }
 
