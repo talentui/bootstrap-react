@@ -8,8 +8,8 @@
     -- project
         -- src
             --> entry.js
-            -- ${containers} //你的页面，代码拆分的依据
-            -- {component} //所有的共享组件
+            -- pages //你的页面，和容器组件，同时也是代码拆分的依据
+            -- component //所有的展现组件
                 --> app.js
                 --> header.js
                 --> sidebar.js
@@ -78,3 +78,21 @@
 
 
 ### 你不需要对路由，redux相关的东西做什么配置，就可以启动程序啦，当然，你还需要[talent-ui-webpackConfig](http://gitlab.beisencorp.com/ux-cnpm/talent-ui-webpack-config) 来帮你生成webpack配置来应用本地的开发环境。
+
+
+# 关于Page和Container
+
+> **Page** 对于单页面应用来说，当我们切换地址的时候，页面并没有刷新，除了所有页面都会显示的公共部分之外（布局组件-Layout）， 变化的地方是浏览器地址变化所对应的一个组件，这个组件可以被叫作页面组件，页面组件作为Layout的组件的子组件，来响应浏览器地址的变化。
+
+> **container**, 在[react-redux](http://redux.js.org/docs/basics/UsageWithReact.html)的网站上也做了说明，但是你需要明白，Container和Page有相关的地方，页面都是Container组件，但不是唯一的Container组件，你可以在需要的时候添加新的container组件，container组件 也可以包含其他的container组件。你可以看一下[这个讲解](http://b8836390.wiz03.com/share/s/2UwSeg0IDkMu2_Oa1d3k5No_3Nre4k28t4Pq2txChW3LGl9B)
+
+
+## 更新说明
+
+### 2月21号
+
+> 为了不让大家产生误解详情请看上面的**关于Page和Container**，我们把页面目录由Containers改成了Pages
+
+> 取消使用index.js来代表页面的规则，因为这个规则和应用查找模块的规则有重合的地方，也就是index.js代表一个目录地址指向的模块，当有目录嵌套的时候我们便会产生混淆。这应该是页面还是模块。所以我们将使用**page-view.js**来表示目录下的页面。
+
+> 关于子路由和代码拆分,根据上面的两条规则，我们可以使用#/home/user这样的路由来访问pages/home/user/page-view.js所代表的页面。同时每一个页面都是一个code splitting的点。因为你不能同时访问两个路由地址，所有的页面组件都是移步加载的。
