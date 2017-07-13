@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import App from "entry";
+import App from "&/entry";
 
 const currentPage = "$$currentPage";
 
@@ -40,7 +40,7 @@ class PageProxy extends Component {
 
     loadAsyncPages(path) {
         import(
-            /* webpackMode: "lazy", webpackChunkName: "[request]" */ `pages/${path}/page-view.js`
+            /* webpackMode: "lazy", webpackChunkName: "[request]" */ `&/pages/${path}/page-view.js`
         ).then(Component => {
             this.setState({
                 [path]: Component["default"],

@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from "redux";
-import appConfig from "app-config";
+import appConfig from "&/app-config";
 const emptyArray = [];
 import composeReducer from "./compose-reducers";
 
@@ -11,7 +11,7 @@ const getMiddlewareConfig = (config = {}) => {
         middlewares = config;
     } else if (typeof config === "object") {
         middlewares = config["middlewares"] || middlewares;
-        callback = config["callback"];
+        callback = config["afterCreateStore"];
         initialState = config["initialState"];
     }
     return { middlewares, callback, initialState };

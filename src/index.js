@@ -3,13 +3,13 @@ import { render } from "react-dom";
 import { HashRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import composeReducer from "./compose-reducers";
-import config from 'app-config';
+import config from '&/app-config';
 
 //import from local file
 import PageProxy from "./page-proxy";
 import configureStore from "./configure-store";
 
-import reducer from "reducers";
+import reducer from "&/reducers";
 
 let store = configureStore(reducer);
 let mountTarget = config.el || 'bsMain';
