@@ -36,8 +36,8 @@ if (module.hot) {
         bootstrap(mountTarget);
     });
 
-    module.hot.accept("reducers", () => {
-        let reducer = require("reducers").default;
+    module.hot.accept("&/reducers", () => {
+        let reducer = require("&/reducers").default;
         store.replaceReducer(composeReducer(reducer));
     });
 }
