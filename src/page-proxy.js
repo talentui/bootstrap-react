@@ -40,7 +40,7 @@ class PageProxy extends Component {
 
     loadAsyncPages(path) {
         import(
-            /* webpackMode: "lazy", webpackChunkName: "[request]" */ `&/pages/${path}/page-view.js`
+            /* webpackMode: "lazy", webpackChunkName: "[request]" */ `&/pages/${path}/page-view`
         ).then(Component => {
             this.setState({
                 [path]: Component["default"],
