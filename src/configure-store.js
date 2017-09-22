@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from "redux";
-import appConfig from "&/app-config";
+import appConfig from "_/src/app-config";
 const emptyArray = [];
 import composeReducer from "./compose-reducers";
 
