@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import App from "_/src/entry";
 
-const tabPattern = "/tabs_/";
+const tabPattern = "/~/";
 const currentPage = "$$currentPage";
 const df = "default";
 
@@ -84,7 +84,7 @@ class PageProxy extends Component {
         let tempTabRecord = "";
         tabPath.split("/").forEach((item, index) => {
             tempTabRecord += index === 0 ? item : `/${item}`;
-            tabArray.push(`${pagePath}${tabPattern}${tempTabRecord}`);
+            tabArray.push(`${pagePath}/${tempTabRecord}`);
         });
         return tabArray;
     }
