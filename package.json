@@ -11,6 +11,10 @@
     "name": "liguoming",
     "email": "liguoming@beisen.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/talentui/bootsrap-react.git"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.5.1",
