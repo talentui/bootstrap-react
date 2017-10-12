@@ -89,6 +89,10 @@
 
 ## 更新说明
 
+### 9月26号
+
+> 添加对tabs的支持，在路径中添加page1/tabs_/sometab会去项目目录中去识别page1目录下的sometab下去找tab-view.js[ts | tsx | jsx]。渲染时会把当前的tab名字作为属性_tabName传给tab-view.js对应的组件下
+
 ### 2月21号
 
 > 为了不让大家产生误解详情请看上面的**关于Page和Container**，我们把页面目录由Containers改成了Pages
