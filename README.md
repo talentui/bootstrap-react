@@ -1,4 +1,4 @@
-# Talent-ui-bootstrap 用来启动Talent UI 程序的核心代码
+# @talentui/bootstrap-react 用来启动Talent UI 程序的核心代码
 
  ## 他包括了原来TalentCore中 启动程序的大部分逻辑，但对流程做了一些简化。
 
@@ -32,7 +32,7 @@
     * 必需！！
     * 应用组件
     * 如果项目中使用了页面对代码进行拆分，需要把页面的代码通过this.props.children来访问页面组件
-    * 在talent-ui-2.0中如果使用了talent-ui-bootstrap作为项目的entry, 只需要export组件就可以了
+    * 在talent-ui-2.0中如果使用了@talentui/bootstrap-react 作为项目的entry, 只需要export组件就可以了
     */
     export default class App extends Component {
         render() {
@@ -77,7 +77,7 @@
 
 
 
-### 你不需要对路由，redux相关的东西做什么配置，就可以启动程序啦，当然，你还需要[talent-ui-webpackConfig](http://gitlab.beisencorp.com/ux-cnpm/talent-ui-webpack-config) 来帮你生成webpack配置来应用本地的开发环境。
+### 你不需要对路由，redux相关的东西做什么配置，就可以启动程序啦，当然，你还需要[@talentui/webpack-config](https://github.com/talentui/webpack-config) 来帮你生成webpack配置来应用本地的开发环境。
 
 
 # 关于Page和Container
