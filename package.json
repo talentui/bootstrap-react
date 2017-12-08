@@ -1,11 +1,13 @@
 {
   "name": "@talentui/bootstrap-react",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
+    "cm": "git-cz",
     "build": "rm -rf lib && babel src -d lib",
-    "prepublish": "yarn run build"
+    "prepublish": "yarn run build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "author": {
     "name": "liguoming",
@@ -16,10 +18,13 @@
     "url": "https://github.com/talentui/bootsrap-react.git"
   },
   "devDependencies": {
+    "@talentui/cz-package-changelog": "^1.0.0",
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.5.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1"
+    "babel-preset-stage-0": "^6.24.1",
+    "commitizen": "^2.9.6",
+    "semantic-release": "^8.2.0"
   },
   "peerDependencies": {
     "react": "^15.6.1",
@@ -27,5 +32,10 @@
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/@talentui/cz-package-changelog"
+    }
   }
 }

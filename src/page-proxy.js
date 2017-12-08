@@ -89,8 +89,8 @@ class PageProxy extends Component {
         return tabArray;
     }
 
-    warn(msg) {
-        console && console.error && console.error(msg)
+    warn(msg, err) {
+        console && console.log && console.log(msg, err)
     }
 
     loadAsyncPages(path) {
@@ -136,10 +136,10 @@ class PageProxy extends Component {
                     });
                 })
                 .catch(err => {
-                    this.warn(`你现在正在请求：${pagePath} 页面下的Tab ${tabPath}，请确认你的路径写对了，或者检查这个组件你做了没`)
+                    this.warn(`加载 ${pagePath} 页面下的Tab ${tabPath} 失败`, err)
                 });
         }).catch(err => {
-            this.warn(`页面 ${pagePath} 没有找到，请确认你的路径是否写对了。`)
+            this.warn(`页面 ${pagePath} 加载失败`, err)
         });
     }
 }
