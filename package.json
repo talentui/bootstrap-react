@@ -1,6 +1,6 @@
 {
   "name": "@talentui/bootstrap-react",
-  "version": "18.0.1",
+  "version": "18.0.2",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
@@ -40,6 +40,6 @@
     }
   },
   "dependencies": {
-    "@beisen/i18n-tools": "0.0.15"
+    "@beisen/i18n-tools": "0.0.16"
   }
 }
