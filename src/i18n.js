@@ -9,7 +9,7 @@ export default function(kickoff) {
     window.I18NTools = I18NTools;
     I18NTools.appInit({
       lng: i18n.lng || I18NInfo.I18NUserLang,
-      i18nSite: I18NInfo.I18NFrontEndHost,
+      i18nSite: i18n.host || I18NInfo.I18NFrontEndHost,
       versions: function() {
         var version = {};
         version[I18NInfo.I18NUserLang] = I18NInfo.I18NVersion;
