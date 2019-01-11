@@ -72,7 +72,8 @@
             app: '应用名称',
             platform: '所属平台',
             host: '接口地址',
-            lng: '语言编码'
+            lng: '语言编码',
+            ns: ['命名空间']
         }
     };
     export default config;

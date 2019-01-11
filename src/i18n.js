@@ -1,6 +1,6 @@
 import I18NTools from '@beisen/i18n-tools';
 import appConfig from '_/src/app-config';
-const { i18n } = appConfig;
+const { i18n = {} } = appConfig;
 
 export default function(kickoff) {
   const { BSGlobal = {} } = window;
@@ -17,6 +17,7 @@ export default function(kickoff) {
       },
       application: i18n.app,
       platform: i18n.platform,
+      namespaces: i18n.ns,
       callback: function() {
         kickoff();
       }
