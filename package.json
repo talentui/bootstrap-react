@@ -6,7 +6,7 @@
   "scripts": {
     "cm": "git-cz",
     "build": "rm -rf lib && NODE_ENV=production babel src -d lib",
-    "prepublish": "yarn run build",
+    "prepublish": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "author": {

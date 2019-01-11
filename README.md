@@ -67,7 +67,13 @@
         middlewares: [reduxThunk],
         afterCreateStore: function(store) {},
         initialState: {},
-        el: 'bsMain'
+        el: 'bsMain',
+        i18n: {
+            app: '应用名称',
+            platform: '所属平台',
+            host: '接口地址',
+            lng: '语言编码'
+        }
     };
     export default config;
 
@@ -88,6 +94,10 @@
 
 
 ## 更新说明
+
+### 2019.1.11
+
+> 添加对多语言的支持，增加appConfig当中的配置
 
 ### 9月26号
 
