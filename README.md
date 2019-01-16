@@ -70,10 +70,11 @@
         el: 'bsMain',
         i18n: {
             app: '应用名称',
-            platform: '所属平台',
+            platform: '所属平台 默认值：isSysRes',
             host: '接口地址',
             lng: '语言编码',
-            ns: ['命名空间']
+            ns: ['命名空间'],
+            debug: '开启调试，默认值false'
         }
     };
     export default config;

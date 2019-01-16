@@ -16,7 +16,8 @@ export default function(kickoff) {
         return version;
       },
       application: i18n.app,
-      platform: i18n.platform,
+      platform: i18n.platform || ' isSysRes',
+      debug: i18n.debug || false,
       namespaces: i18n.ns,
       callback: function() {
         kickoff();
