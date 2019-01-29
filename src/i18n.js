@@ -5,8 +5,8 @@ const { i18n = {} } = appConfig;
 export default function(kickoff) {
   const { BSGlobal = {} } = window;
   const { I18NInfo } = BSGlobal;
+  window.I18NTools = I18NTools; //
   if (I18NInfo) {
-    window.I18NTools = I18NTools;
     I18NTools.appInit({
       lng: i18n.lng || I18NInfo.I18NUserLang,
       i18nSite: i18n.host || I18NInfo.I18NFrontEndHost,

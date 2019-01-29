@@ -41,6 +41,6 @@
     }
   },
   "dependencies": {
-    "@beisen/i18n-tools": "^0.1.2"
+    "@beisen/i18n-tools": "^0.1.9"
   }
 }
