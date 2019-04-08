@@ -1,41 +1,43 @@
 {
   "name": "@talentui/bootstrap-react",
-  "version": "0.0.0-development",
+  "version": "2.0.0",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
     "cm": "git-cz",
     "build": "rm -rf lib && babel src -d lib",
-    "prepublish": "yarn run build",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "build-prod": "rm -rf lib && NODE_ENV=production babel src -d lib",
+    "prepublish": "npm run build"
   },
   "author": {
     "name": "liguoming",
-    "email": "liguoming@beisen.com"
+    "email": "it1011@qq.com"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/talentui/bootsrap-react.git"
   },
   "devDependencies": {
-    "@talentui/cz-package-changelog": "^1.0.0",
-    "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.5.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
+    "@talentui/get-babel-config": "^4.0.5",
     "commitizen": "^2.9.6",
-    "semantic-release": "^8.2.0"
+    "core-js": "^3.0.1",
+    "cz-conventional-changelog": "^2.1.0"
   },
   "peerDependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.1",
-    "redux": "^3.6.0"
+    "@babel/runtime": "^7.4.3",
+    "core-js": "^3.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^5.1.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^3.7.2"
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/@talentui/cz-package-changelog"
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
