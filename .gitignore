@@ -50,3 +50,5 @@ tmp.text
 error.text
 
 yarn.lock
+
+.vscode
