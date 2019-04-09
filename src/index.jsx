@@ -52,14 +52,3 @@ class Bootstrap {
 const app = new Bootstrap();
 
 export { app as default };
-
-if (module.hot) {
-  module.hot.accept('./page-proxy', () => {
-    app.start();
-  });
-
-  //   module.hot.accept('_/src/reducers', () => {
-  //     let reducer = require('_/src/reducers').default;
-  //     store.replaceReducer(composeReducer(reducer));
-  //   });
-}
