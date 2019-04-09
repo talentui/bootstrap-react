@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 const currentPage = '$$currentPage';
 const df = 'default';
 
-export default function getPageProxy(Layout, pageLoader) {
+export default function getPageProxy(Layout) {
   return class PageProxy extends Component {
     state = {};
 
@@ -51,7 +51,7 @@ export default function getPageProxy(Layout, pageLoader) {
     }
 
     loadAsyncPages(path) {
-      let loadPage = this.state[path] ? undefined : pageLoader(path);
+      let loadPage = this.state[path] ? undefined : import(/* webpackMode: "lazy", webpackChunkName: "[request]" */ `_/src/pages/${path}/page-view`);
       Promise.all([loadPage])
         .then(([PageComponent]) => {
           let needUpdate = false;

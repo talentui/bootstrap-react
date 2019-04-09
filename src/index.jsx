@@ -32,7 +32,7 @@ class Bootstrap {
    * @param {function} options.pageLoader - 加载页面的方法
    */
   config(options) {
-    this.reduxStore = configureStore(options);
+    this.reduxStore = this.reduxStore || configureStore(options);
     this.mountTarget = this.getMountTarget(options.el);
     this.pageProxy = this.initPageProxy(options.layout, options.pageLoader);
   }
@@ -52,3 +52,9 @@ class Bootstrap {
 const app = new Bootstrap();
 
 export { app as default };
+
+if (module.hot) {
+  module.hot.accept("./page-proxy", () => {
+      app.start();
+  });
+}
