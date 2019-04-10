@@ -24,8 +24,7 @@ class Bootstrap {
    * @param {function | object} options.reducer - redux reducer
    * @param {string | HTMLElement} options.el - 应用的挂载点
    * @param {function} options.afterCreateStore - 创建完store之后的回调
-   * @param {React.ComponentClass} options.layout - 布局组件
-   * @param {function} options.pageLoader - 加载页面的方法
+   * @param {reduxMiddleware[]} options.middlewares - redux中间件
    */
   config(options) {
     this.reduxStore = this.reduxStore || configureStore(options);
