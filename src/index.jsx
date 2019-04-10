@@ -29,17 +29,28 @@ class Bootstrap {
   config(options) {
     this.reduxStore = this.reduxStore || configureStore(options);
     this.mountTarget = this.getMountTarget(options.el);
+    this.LoadingComp = options.loadingComp;
+    this.ErrorComp = options.errorComp;
   }
 
-  replaceReducer(reducer){
-    this.reduxStore.replaceReducer(composeReducer(reducer)); 
+  replaceReducer(reducer) {
+    this.reduxStore.replaceReducer(composeReducer(reducer));
   }
 
   start() {
     render(
       <Provider store={this.reduxStore}>
         <Router>
-          <Route path="*" component={PageProxy} />
+          <Route
+            path="*"
+            render={props => (
+              <PageProxy
+                LoadingComp={this.LoadingComp}
+                ErrorComp={this.ErrorComp}
+                {...props}
+              />
+            )}
+          />
         </Router>
       </Provider>,
       this.mountTarget
@@ -52,7 +63,7 @@ const app = new Bootstrap();
 export { app as default };
 
 if (module.hot) {
-  module.hot.accept("./page-proxy", () => {
-      app.start();
+  module.hot.accept('./page-proxy', () => {
+    app.start();
   });
 }

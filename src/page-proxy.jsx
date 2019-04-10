@@ -5,7 +5,7 @@ const currentPage = '$$currentPage';
 const df = 'default';
 
 export default class PageProxy extends Component {
-  state = {};
+  state = { hasError: false };
 
   getPagePath(props) {
     let {
@@ -26,32 +26,47 @@ export default class PageProxy extends Component {
     }
   }
 
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(err, info) {
+    this.warn('哎呀，出错了');
+    this.warn(info.componentStack);
+  }
+
   renderPageElement() {
     let { state } = this;
     let pagePath = this.getPagePath(this.props);
     let PageComponent = state[pagePath];
-    return !!PageComponent ? (
-      <PageComponent {...this.props} />
-    ) : (
-      <div>loading...</div>
-    );
+    if (PageComponent) {
+      let { useLayout } = PageComponent;
+      this.useLayout = typeof useLayout === 'boolean' ? useLayout : true; //缓存当前useLayout的状态，进入下一个页面的时候避免发生layout的切换导致的闪动
+      return [<PageComponent {...this.props} />, this.useLayout];
+    }
+    let { LoadingComp } = this.props;
+    //读取之前的layout状态，如果不存在就用true
+    this.useLayout =
+      typeof this.useLayout === 'boolean' ? this.useLayout : true;
+    if (LoadingComp) {
+      return [<LoadingComp />, this.useLayout];
+    }
+    return [<div>加载中...</div>, this.useLayout];
   }
 
   render() {
-    let pageElement = this.renderPageElement();
-    if (Layout) return <Layout {...this.props}>{pageElement}</Layout>;
-    return pageElement;
+    let { ErrorComp } = this.props;
+    if (this.state.hasError && ErrorComp) return <ErrorComp />;
+    let [pageElement, useLayout] = this.renderPageElement();
+    if (!useLayout) return pageElement;
+    return <Layout {...this.props}>{pageElement}</Layout>;
   }
 
   warn(msg, err) {
     if (console && console.error) {
       console.error(msg);
-      throw err;
+      if (err) throw err;
     }
-  }
-
-  componentDidCatch() {
-
   }
 
   loadAsyncPages(path) {
@@ -78,4 +93,4 @@ export default class PageProxy extends Component {
         this.warn(`页面 ${path} 加载失败`, err);
       });
   }
-};
+}
