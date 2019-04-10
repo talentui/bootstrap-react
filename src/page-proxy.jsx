@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Layout from '_/src/layout';
 
 const currentPage = '$$currentPage';
 const df = 'default';
@@ -35,30 +34,24 @@ export default class PageProxy extends Component {
     this.warn(info.componentStack);
   }
 
-  renderPageElement() {
+  renderPageElement(props, Loading) {
     let { state } = this;
-    let pagePath = this.getPagePath(this.props);
-    let PageComponent = state[pagePath];
-    if (PageComponent) {
-      let { useLayout } = PageComponent;
+    let Page = state[this.getPagePath(this.props)];
+    if (Page) {
+      let { useLayout } = Page;
       this.useLayout = typeof useLayout === 'boolean' ? useLayout : true; //缓存当前useLayout的状态，进入下一个页面的时候避免发生layout的切换导致的闪动
-      return [<PageComponent {...this.props} />, this.useLayout];
+      return [<Page {...this.props} />, this.useLayout];
     }
-    let { LoadingComp } = this.props;
     //读取之前的layout状态，如果不存在就用true
-    this.useLayout =
-      typeof this.useLayout === 'boolean' ? this.useLayout : true;
-    if (LoadingComp) {
-      return [<LoadingComp />, this.useLayout];
-    }
-    return [<div>加载中...</div>, this.useLayout];
+    let ul = this.useLayout === 'boolean' ? this.useLayout : true;
+    return [Loading ? <Loading /> : <div>加载中...</div>, ul];
   }
 
   render() {
-    let { ErrorComp } = this.props;
+    let { ErrorComp, Layout, LoadingComp, ...props } = this.props;
     if (this.state.hasError && ErrorComp) return <ErrorComp />;
-    let [pageElement, useLayout] = this.renderPageElement();
-    if (!useLayout) return pageElement;
+    let [pageElement, useLayout] = this.renderPageElement(props, LoadingComp);
+    if (!useLayout || !Layout) return pageElement;
     return <Layout {...this.props}>{pageElement}</Layout>;
   }
 
