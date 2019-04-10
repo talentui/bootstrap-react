@@ -2,8 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import composeReducer from './compose-reducers';
 
-import getPageProxy from './page-proxy';
+import PageProxy from './page-proxy';
 import configureStore from './configure-store';
 
 class Bootstrap {
@@ -18,11 +19,6 @@ class Bootstrap {
     );
   }
 
-  initPageProxy(layout, pageLoader) {
-    if (this.pageProxy) return this.pageProxy;
-    return getPageProxy(layout, pageLoader);
-  }
-
   /**
    *
    * @param {function | object} options.reducer - redux reducer
@@ -34,14 +30,17 @@ class Bootstrap {
   config(options) {
     this.reduxStore = this.reduxStore || configureStore(options);
     this.mountTarget = this.getMountTarget(options.el);
-    this.pageProxy = this.initPageProxy(options.layout, options.pageLoader);
+  }
+
+  replaceReducer(reducer){
+    this.reduxStore.replaceReducer(composeReducer(reducer)); 
   }
 
   start() {
     render(
       <Provider store={this.reduxStore}>
         <Router>
-          <Route path="*" component={this.pageProxy} />
+          <Route path="*" component={PageProxy} />
         </Router>
       </Provider>,
       this.mountTarget
