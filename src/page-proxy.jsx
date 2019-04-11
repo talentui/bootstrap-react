@@ -26,7 +26,7 @@ export default class PageProxy extends Component {
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true };
+    return { hasError: true, error };
   }
 
   componentDidCatch(err, info) {
@@ -49,7 +49,7 @@ export default class PageProxy extends Component {
 
   render() {
     let { ErrorComp, Layout, LoadingComp, ...props } = this.props;
-    if (this.state.hasError && ErrorComp) return <ErrorComp />;
+    if (this.state.hasError && ErrorComp) return <ErrorComp error={this.state.error} {...props} />;
     let [pageElement, useLayout] = this.renderPageElement(props, LoadingComp);
     if (!useLayout || !Layout) return pageElement;
     return <Layout {...this.props}>{pageElement}</Layout>;
